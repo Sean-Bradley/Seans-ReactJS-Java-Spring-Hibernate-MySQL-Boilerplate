@@ -1,7 +1,7 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
-/javaSpringRestAPI/.mvn
-/javaSpringRestAPI/target
+/java/.mvn
+/java/target
 
-/nodejs/node_modules
-/nodejs/package-lock.json
+/react/node_modules
+/react/package-lock.json

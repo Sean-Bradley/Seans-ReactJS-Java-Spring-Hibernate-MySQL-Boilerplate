@@ -3,12 +3,10 @@ services:
   web:
     build: .
     ports:
-      #- "80:80"
-      #- "443:443"
       - "8443:8443"
     command: nginx -g "daemon off";
     volumes:
-      - ./nodejs/dist:/www:ro
+      - ./react/dist:/www:ro
     depends_on:      
       - mysql
       - java
@@ -22,19 +20,16 @@ services:
       MYSQL_ROOT_PASSWORD: secret
     expose:
       - "3306"
-    #ports:
-    #  - 3306:3306
     restart: always
     volumes:
-      - ./data:/docker-entrypoint-initdb.d
+      - ./db:/docker-entrypoint-initdb.d
 
   java:
     restart: always
-    build: ./javaSpringRestAPI
-    working_dir: /javaSpringRestAPI
+    build: ./java
+    working_dir: /java
     volumes:
-      - ./javaSpringRestAPI:/javaSpringRestAPI
-      #- ~/.m2:/root/.m2
+      - ./java:/java
     expose:
       - "8080"
     command: mvn clean spring-boot:run
