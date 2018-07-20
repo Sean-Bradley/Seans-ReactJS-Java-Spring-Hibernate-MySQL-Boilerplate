@@ -15,5 +15,5 @@ The running project consists of
 * Nginx Proxy redirecting /api calls to the Java Spring API
 
 
-** Note,
+## Note,
 this is a work in progress, you will find bugs
