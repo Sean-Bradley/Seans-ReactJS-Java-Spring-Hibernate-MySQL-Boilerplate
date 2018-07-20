@@ -1,1 +1,3 @@
-# Seans-ReactJS-Java-Spring-Hybernate-MySQL-Boilerplate
+# Seans ReactJS Java Spring Hibernate MySQL Boilerplate
+
+WIP
