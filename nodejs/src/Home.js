@@ -9,9 +9,9 @@ class Home extends Component {
         return (
             <div>
                 <div className="jumbotron text-center">
-                    <h1>seans reactjs nodejs mongodb boilerplate</h1>
-                    <p>Boilerplate for ReactJS, NodeJS and MongoDB.</p>
-                    <p>Includes Gulp Minify, Uglify, Concat, Mocha and Chai Tests</p>
+                    <h1>seans reactjs java spring hibernate mysql boilerplate</h1>
+                    <p>todo</p>
+                    <p>todo</p>
                 </div>
                 <p>Nothing to see here, go and see {<Link to='/Cats'>Cats</Link>} instead.</p>
             </div>

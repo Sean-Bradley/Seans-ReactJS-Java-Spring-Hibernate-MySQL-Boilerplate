@@ -14,7 +14,7 @@ class App extends Component {
                     <nav className="navbar navbar-default" ng-controller="navbarCtrl">
                         <div className="container-fluid">
                             <div className="navbar-header">
-                                <a className="navbar-brand" href="#">seans-reactjs-nodejs-mongodb-boilerplate</a>
+                                <a className="navbar-brand" href="#">seans-reactjs-java-spring-hibernate-mysql-boilerplate</a>
                             </div>
                             <ul className="nav navbar-nav">
                                 <li><Link to={'/'}>Home</Link></li>
@@ -35,7 +35,7 @@ class App extends Component {
 
                     <footer className='footer'>
                         <div className='container'>
-                            <span className='text-muted'>You can download this project from my github project page at <a href='https://github.com/Sean-Bradley/Seans-ReactJS-NodeJS-MongoDB-Boilerplate' target='_blank'>https://github.com/Sean-Bradley/Seans-ReactJS-NodeJS-MongoDB-Boilerplate</a></span>
+                            <span className='text-muted'>You can download this project from my github project page at <a href='https://github.com/Sean-Bradley/Seans-ReactJS-Java-Spring-Hibernate-MySQL-Boilerplate' target='_blank'>https://github.com/Sean-Bradley/Seans-ReactJS-Java-Spring-Hibernate-MySQL-Boilerplate</a></span>
                         </div>
                     </footer>
                 </div>

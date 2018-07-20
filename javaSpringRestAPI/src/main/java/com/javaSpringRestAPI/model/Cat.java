@@ -30,7 +30,7 @@ public class Cat implements Serializable {
     private String name = "";
 
     @Column(nullable = false, name = "isHungry", columnDefinition = "tinyint(1) default '1'")
-    private Boolean isHungry;
+    private Boolean isHungry = true;
 
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)

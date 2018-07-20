@@ -14,7 +14,7 @@ import com.javaSpringRestAPI.repository.CatRepository;
  * @author Sean Bradley
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/")
 public class CatController {
 
     @Autowired
@@ -26,7 +26,10 @@ public class CatController {
     }
 
     @PostMapping("/cats")
-    public Cat createCat(@Valid @RequestBody Cat cat) {
+    public Cat createCat(@Valid @RequestBody String name) {
+        System.out.println("name = " + name);
+        Cat cat = new Cat();
+        cat.setName(name);
         return catRepository.save(cat);
     }
 

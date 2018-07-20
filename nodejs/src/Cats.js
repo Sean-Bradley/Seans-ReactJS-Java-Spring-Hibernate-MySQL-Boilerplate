@@ -59,15 +59,16 @@ class Cats extends Component {
     }
     saveEdits(v, id) {
         console.log(v + " " + id);
-        fetch('/api/Cats/' + id, {
+        fetch('/api/cats/' + id, {
             method: 'put',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
                 'Cache-Control': 'no-cache'
             },
-            body: "name=" + v
+            body: JSON.stringify({"name": v})
         }).then(
-            fetch('/api/Cats')
+            fetch('/api/cats')
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById("name_" + id).style.display = "block";
@@ -85,16 +86,17 @@ class Cats extends Component {
         )
     }
     handleAddClick() {
-        fetch('/api/Cats', {
+        fetch('/api/cats', {
             method: 'post',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
                 'Cache-Control': 'no-cache'
             },
-            body: "name=" + this.state.catName
+            body: JSON.stringify({"name": this.state.catName})
         })
             .then(
-                fetch('/api/Cats')
+                fetch('/api/cats')
                     .then(response => response.json())
                     .then(data => {
                         this.state.data = data;
@@ -114,15 +116,15 @@ class Cats extends Component {
         document.getElementById("saveButton_" + id).style.display = "block";
     }
     handleDeleteClick(e, id) {
-        fetch('/api/Cats/' + id, {
+        fetch('/api/cats/' + id, {
             method: 'delete',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
+                'Content-Type': 'application/json',
                 'Cache-Control': 'no-cache'
             }
         })
             .then(
-                fetch('/api/Cats')
+                fetch('/api/cats')
                     .then(response => response.json())
                     .then(data => {
                         this.state.data = data;
@@ -159,7 +161,7 @@ class Cats extends Component {
                     className="-striped -highlight"
                     onFetchData={(state, instance) => {
                         this.setState({ loading: true })
-                        fetch('/api/Cats')
+                        fetch('/api/cats')
                             .then(response => response.json())
                             .then(data => {
                                 this.setState({ data: data })
