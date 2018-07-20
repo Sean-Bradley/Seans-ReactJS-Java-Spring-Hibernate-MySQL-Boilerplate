@@ -2,3 +2,6 @@
 
 /javaSpringRestAPI/.mvn
 /javaSpringRestAPI/target
+
+/nodejs/node_modules
+/nodejs/package-lock.json
