@@ -7,7 +7,6 @@ class Cats extends Component {
     constructor(props) {
         super(props);
 
-
         this.state = {
             data: [],
             names: {},
@@ -16,18 +15,18 @@ class Cats extends Component {
             addButtonEnabled: false,
             columns: [{
                 Header: 'Id',
-                accessor: '_id'
+                accessor: 'id'
             }, {
                 Header: 'Genus',
                 accessor: 'genus',
             }, {
                 id: "editCell",
                 Header: 'Name',
-                accessor: d => this.state.names[d._id] = d.name,
+                accessor: d => this.state.names[d.id] = d.name,
                 Cell: row => (
                     <div>
-                        <span id={"name_" + row.original._id}>{row.original.name}</span>
-                        <input id={"input_" + row.original._id} style={{ display: 'none' }} type="text" defaultValue={row.original.name} placeholder="Cat Name" onBlur={(e) => this.saveEdits(e.target.value, row.original._id)} />
+                        <span id={"name_" + row.original.id}>{row.original.name}</span>
+                        <input id={"input_" + row.original.id} style={{ display: 'none' }} type="text" defaultValue={row.original.name} placeholder="Cat Name" onBlur={(e) => this.saveEdits(e.target.value, row.original.id)} />
                     </div>
                 )
             }, {
@@ -39,16 +38,16 @@ class Cats extends Component {
                 accessor: 'lastFedDate',
             }, {
                 id: 'edit',
-                accessor: '_id',
+                accessor: 'id',
                 Cell: row => (
                     <div>
-                        <button id={"editButton_" + row.original._id} className="btn btn-success" onClick={(e) => this.handleEditClick(e, row.value)}>Edit</button>
-                        <button id={"saveButton_" + row.original._id} style={{ display: 'none' }} className="btn btn-warning">Save</button>
+                        <button id={"editButton_" + row.original.id} className="btn btn-success" onClick={(e) => this.handleEditClick(e, row.value)}>Edit</button>
+                        <button id={"saveButton_" + row.original.id} style={{ display: 'none' }} className="btn btn-warning">Save</button>
                     </div>
                 )
             }, {
                 id: 'delete',
-                accessor: '_id',
+                accessor: 'id',
                 Cell: ({ value }) => (<button className="btn btn-danger" onClick={(e) => this.handleDeleteClick(e, value)}>Delete</button>)
             }]
         }
@@ -56,9 +55,29 @@ class Cats extends Component {
         this.handleEditClick = this.handleEditClick.bind(this);
         this.handleDeleteClick = this.handleDeleteClick.bind(this);
         this.handleAddChange = this.handleAddChange.bind(this);
+        this.refreshTableData = this.refreshTableData.bind(this);
+    }
+    refreshTableData() {
+        fetch('/api/cats', {
+            method: 'get',
+            headers: {
+                'Accept': 'application/json',
+                'Cache-Control': 'no-cache'
+            }
+        }).then(response => response.json())
+            .then(data => {
+                //console.dir(data);
+                this.state.data = data;
+                this.setState({
+                    table: {
+                        columns: this.state.columns,
+                        data: this.state.data
+                    }
+                })
+            })
     }
     saveEdits(v, id) {
-        console.log(v + " " + id);
+        //console.log(v + " " + id);
         fetch('/api/cats/' + id, {
             method: 'put',
             headers: {
@@ -66,24 +85,14 @@ class Cats extends Component {
                 'Content-Type': 'application/json',
                 'Cache-Control': 'no-cache'
             },
-            body: JSON.stringify({"name": v})
-        }).then(
-            fetch('/api/cats')
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById("name_" + id).style.display = "block";
-                    document.getElementById("input_" + id).style.display = "none";
-                    document.getElementById("editButton_" + id).style.display = "block";
-                    document.getElementById("saveButton_" + id).style.display = "none";
-                    this.state.data = data;
-                    this.setState({
-                        table: {
-                            columns: this.state.columns,
-                            data: this.state.data
-                        }
-                    })
-                })
-        )
+            body: JSON.stringify({ "name": v })
+        }).then(() => {
+            this.refreshTableData();
+            document.getElementById("name_" + id).style.display = "block";
+            document.getElementById("input_" + id).style.display = "none";
+            document.getElementById("editButton_" + id).style.display = "block";
+            document.getElementById("saveButton_" + id).style.display = "none";
+        })
     }
     handleAddClick() {
         fetch('/api/cats', {
@@ -93,21 +102,11 @@ class Cats extends Component {
                 'Content-Type': 'application/json',
                 'Cache-Control': 'no-cache'
             },
-            body: JSON.stringify({"name": this.state.catName})
+            body: JSON.stringify({ "name": this.state.catName })
+        }).then(() => {
+            this.refreshTableData();
+            this.state.catName = "";
         })
-            .then(
-                fetch('/api/cats')
-                    .then(response => response.json())
-                    .then(data => {
-                        this.state.data = data;
-                        this.setState({
-                            table: {
-                                columns: this.state.columns,
-                                data: this.state.data
-                            }
-                        })
-                    })
-            )
     };
     handleEditClick(e, id) {
         document.getElementById("name_" + id).style.display = "none";
@@ -122,20 +121,7 @@ class Cats extends Component {
                 'Content-Type': 'application/json',
                 'Cache-Control': 'no-cache'
             }
-        })
-            .then(
-                fetch('/api/cats')
-                    .then(response => response.json())
-                    .then(data => {
-                        this.state.data = data;
-                        this.setState({
-                            table: {
-                                columns: this.state.columns,
-                                data: this.state.data
-                            }
-                        })
-                    })
-            )
+        }).then(() => {this.refreshTableData()})
     }
 
     handleAddChange(e) {

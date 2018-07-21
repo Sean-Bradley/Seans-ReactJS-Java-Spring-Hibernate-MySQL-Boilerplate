@@ -1,6 +1,7 @@
 version: '3'
 services:
   web:
+    container_name: nginx
     build: .
     ports:
       - "8443:8443"
@@ -25,6 +26,7 @@ services:
       - ./db:/docker-entrypoint-initdb.d
 
   java:
+    container_name: java
     restart: always
     build: ./java
     working_dir: /java

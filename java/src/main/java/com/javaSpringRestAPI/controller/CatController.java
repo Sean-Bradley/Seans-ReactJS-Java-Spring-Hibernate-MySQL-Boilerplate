@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 import com.javaSpringRestAPI.repository.CatRepository;
+import javax.transaction.Transactional;
 
 /**
  *
@@ -22,14 +23,17 @@ public class CatController {
 
     @GetMapping("/cats")
     public List<Cat> getAllCats() {
-        return catRepository.findAll();
+        List<Cat> cats = catRepository.findAll();
+        //for (Cat c : cats) {
+        //    System.out.println(c.getName());
+        //}
+        return cats;
     }
 
+    @Transactional
     @PostMapping("/cats")
-    public Cat createCat(@Valid @RequestBody String name) {
-        System.out.println("name = " + name);
-        Cat cat = new Cat();
-        cat.setName(name);
+    public Cat createCat(@Valid @RequestBody Cat cat) {
+        //System.out.println("adding " + cat.getName());
         return catRepository.save(cat);
     }
 
@@ -39,23 +43,26 @@ public class CatController {
                 .orElseThrow(() -> new ResourceNotFoundException("Cat", "id", catId));
     }
 
+    @Transactional
     @PutMapping("/cats/{id}")
-    public Cat updateCat(@PathVariable(value = "id") Long catId, @Valid @RequestBody String name) {
+    public Cat updateCat(@PathVariable(value = "id") Long catId, @Valid @RequestBody Cat updatedCat) {
 
         Cat cat = catRepository.findById(catId)
                 .orElseThrow(() -> new ResourceNotFoundException("Cat", "id", catId));
 
-        cat.setName(name);
+        cat.setName(updatedCat.getName());
 
-        Cat updatedCat = catRepository.save(cat);
-        return updatedCat;
+        cat = catRepository.save(cat);
+        return cat;
     }
 
+    @Transactional
     @DeleteMapping("/cats/{id}")
     public ResponseEntity<?> deleteCat(@PathVariable(value = "id") Long catId) {
         Cat cat = catRepository.findById(catId)
                 .orElseThrow(() -> new ResourceNotFoundException("Cat", "id", catId));
 
+        //System.out.println("deleting " + cat.getName());
         catRepository.delete(cat);
 
         return ResponseEntity.ok().build();
