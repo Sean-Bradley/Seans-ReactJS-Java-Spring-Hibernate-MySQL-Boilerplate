@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "babel-node server.js",
-    "test": "mocha --require ignore-styles tests.js ./src/*.spec.jsx"
+    "test": "mocha --require ignore-styles tests.js ./src/*.spec.jsx",
+    "update-webdriver": "webdriver-manager update",
+    "protractor": "protractor e2e-tests/protractor.conf.js"
   },
   "author": "Sean Bradley",
   "license": "ISC",
@@ -32,6 +34,7 @@
     "enzyme-adapter-react-15": "^1.0.6",
     "enzyme-adapter-react-16": "^1.1.1",
     "ignore-styles": "^5.0.1",
+    "jasmine-spec-reporter": "^4.2.1",
     "jsdom": "^11.11.0",
     "mocha": "^5.2.0",
     "react": "^16.4.1",
