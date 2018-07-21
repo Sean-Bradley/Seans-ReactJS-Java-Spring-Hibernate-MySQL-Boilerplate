@@ -42,7 +42,7 @@ If you use docker toolbox on windows 10 home, the site will be published at ip 1
 There is also the option to do e2e testing with protractor and jasmine.
 Before you start, you need to install protractor
 
-`cd nodejs`
+`cd react`
 
 `npm install -g protractor`
 
