@@ -10,8 +10,8 @@ export class Home extends Component {
             <div>
                 <div className="jumbotron text-center">
                     <h1>seans reactjs java spring hibernate mysql boilerplate</h1>
-                    <p>todo</p>
-                    <p>todo</p>
+                    <p>A dockerised boilerplate for building a full stack ReactJS app with a Java Spring backend.</p>
+                    <p>Also comes with Mocka, Chai, Enzyme and Protractor e2e tests.</p>
                 </div>
                 <p>Nothing to see here, go and see {<Link to='/Cats'>Cats</Link>} instead.</p>
             </div>

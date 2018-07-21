@@ -1,4 +1,3 @@
-import webpack from 'webpack';
 import path from 'path';
 import WriteAssetsWebpackPlugin from 'write-assets-webpack-plugin';
 
