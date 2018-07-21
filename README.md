@@ -1,6 +1,6 @@
 # Seans ReactJS Java Spring Hibernate MySQL Boilerplate
 
-*Comes Dockerised and with Tests*
+*Comes Dockerised and with Unit Testing*
 
 ## To Start
 
@@ -23,11 +23,13 @@ If you use docker toolbox on windows 10 home, the site will be published at ip 1
 
 ![Screenshot](homeScreenshot.png)
 
-The running project consists of 
-* MySQL
-* Java Spring-Boot and JPA Hibernate
-* Nginx Proxy hosting static generated react html and javascript
+## The running project consists of 
+
+* Nginx Proxy hosting the compiled ReactJS App
 * Nginx Proxy redirecting /api calls to the Java Spring API
+* Java Spring-Boot JPA Hibernate Rest API running in TomCat
+* MySQL database
+
 
 ## Mocha, Chai and Enzyme tests
 
