@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-class Home extends Component {
+export class Home extends Component {
     constructor(props) {
         super(props);
     }
@@ -18,4 +18,4 @@ class Home extends Component {
         );
     }
 }
-export default Home;
+

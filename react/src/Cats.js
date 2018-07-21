@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import ReactTable from "react-table";
 import 'react-table/react-table.css'
 
-
-class Cats extends Component {
+export class Cats extends Component {
     constructor(props) {
         super(props);
 
@@ -176,4 +175,3 @@ class Cats extends Component {
         );
     }
 }
-export default Cats;

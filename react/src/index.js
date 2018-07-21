@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import Home from './Home';
-import Cats from './Cats';
-import Dogs from './Dogs';
-import Birds from './Birds';
+import { Home } from './home';
+import { Cats } from './cats';
+import { Dogs } from './dogs';
+import { Birds } from './birds';
 
 class App extends Component {
     render() {

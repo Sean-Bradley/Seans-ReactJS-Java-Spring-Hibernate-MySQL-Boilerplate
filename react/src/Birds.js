@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-class Birds extends Component {
+export class Birds extends Component {
     render() {
         return (
             <div>
@@ -11,4 +11,3 @@ class Birds extends Component {
         );
     }
 }
-export default Birds;

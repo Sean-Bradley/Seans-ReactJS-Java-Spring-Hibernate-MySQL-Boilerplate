@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-class Dogs extends Component {
+export class Dogs extends Component {
     render() {
         return (
             <div>
@@ -11,4 +11,3 @@ class Dogs extends Component {
         );
     }
 }
-export default Dogs;
