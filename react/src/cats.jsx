@@ -92,7 +92,7 @@ export class Cats extends Component {
             document.getElementById("editButton_" + id).style.display = "block";
             document.getElementById("saveButton_" + id).style.display = "none";
         })
-    }
+    }    
     handleAddClick() {
         fetch('/api/cats', {
             method: 'post',
@@ -122,7 +122,6 @@ export class Cats extends Component {
             }
         }).then(() => {this.refreshTableData()})
     }
-
     handleAddChange(e) {
         this.setState({ catName: e.target.value });
         var enabled = this.state.catName.length >= 2 && this.state.catName.length <= 20;
@@ -134,7 +133,6 @@ export class Cats extends Component {
         }
     }
     render() {
-
         return (
             <div>
                 <h1>Cats</h1>
