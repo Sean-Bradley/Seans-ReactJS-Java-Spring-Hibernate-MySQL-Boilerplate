@@ -4,10 +4,10 @@ const Enzyme = require('enzyme');
 const EnzymeAdapter = require('enzyme-adapter-react-16');
 Enzyme.configure({ adapter: new EnzymeAdapter() });
 
-var jsdom = require('jsdom');
+const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 
-var exposedProperties = ['window', 'navigator', 'document'];
+const exposedProperties = ['window', 'navigator', 'document'];
 
 const { document } = (new JSDOM('')).window;
 global.window = document.defaultView;

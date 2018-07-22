@@ -65,12 +65,11 @@ export class Cats extends Component {
             }
         }).then(response => response.json())
             .then(data => {
-                //console.dir(data);
-                this.state.data = data;
                 this.setState({
+                    data: data,
                     table: {
                         columns: this.state.columns,
-                        data: this.state.data
+                        data: data
                     }
                 })
             })
@@ -92,7 +91,7 @@ export class Cats extends Component {
             document.getElementById("editButton_" + id).style.display = "block";
             document.getElementById("saveButton_" + id).style.display = "none";
         })
-    }    
+    }
     handleAddClick() {
         fetch('/api/cats', {
             method: 'post',
@@ -104,7 +103,7 @@ export class Cats extends Component {
             body: JSON.stringify({ "name": this.state.catName })
         }).then(() => {
             this.refreshTableData();
-            this.state.catName = "";
+            this.setState({ catName: '' });
         })
     };
     handleEditClick(e, id) {
@@ -120,19 +119,26 @@ export class Cats extends Component {
                 'Content-Type': 'application/json',
                 'Cache-Control': 'no-cache'
             }
-        }).then(() => {this.refreshTableData()})
+        }).then(() => { this.refreshTableData() })
     }
     handleAddChange(e) {
-        this.setState({ catName: e.target.value });
-        var enabled = this.state.catName.length >= 2 && this.state.catName.length <= 20;
-        this.state.addButtonEnabled = enabled;
-        if (enabled) {
-            document.getElementById("validationMessage").style.display = "none";
-        } else {
-            document.getElementById("validationMessage").style.display = "block";
-        }
+        const newCatName = e.target.value;
+        let enabled = newCatName.length >= 2 && newCatName.length <= 20;
+        this.setState({ catName: newCatName, addButtonEnabled: enabled });
     }
     render() {
+        let addCatOptions;
+        if (this.state.addButtonEnabled) {
+            addCatOptions = <button onClick={this.handleAddClick}>Add Cat</button>
+        } else {
+            addCatOptions = (
+                <span>
+                    <button disabled>Add Cat</button>
+                    <span id='validationMessage' style={{ color: 'red' }}>Cat Name is not valid.</span>
+                </span>
+            )
+        }
+
         return (
             <div>
                 <h1>Cats</h1>
@@ -154,16 +160,13 @@ export class Cats extends Component {
                     }
                 />
 
-                <p>Cat Name:
-                    <input
-                        type="text"
-                        value={this.state.catName}
-                        placeholder="Cat Name"
-                        onChange={this.handleAddChange}
-                    />
-                    <button disabled={!this.state.addButtonEnabled} onClick={this.handleAddClick}>Add Cat</button>
-                    <span id='validationMessage' style={{ display: 'none', color: 'red' }}>Cat Name is not valid.</span>
-                </p>
+                <div>
+                    <label>
+                        Cat Name:
+                        <input type="text" value={this.state.catName} onChange={this.handleAddChange} placeholder="Cat Name" />
+                    </label>
+                    {addCatOptions}
+                </div>
 
                 <hr />
                 <div>Debug

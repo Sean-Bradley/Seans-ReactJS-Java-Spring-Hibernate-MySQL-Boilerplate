@@ -21,7 +21,7 @@ describe('Cats', function () {
   //});
 
   it('should click the Cats link', function () {
-    var link = $('[href*=Cats]');
+    const link = $('[href*=Cats]');
     link.click()
   })
 
@@ -37,7 +37,7 @@ describe('Cats', function () {
   });
 
   it('should click the Dogs link', function () {
-    var link = $('[href*=Dogs]');
+    const link = $('[href*=Dogs]');
     link.click()
   })
 
@@ -49,7 +49,7 @@ describe('Cats', function () {
   })
 
   it('should click the Birds link', function () {
-    var link = $('[href*=Birds]');
+    const link = $('[href*=Birds]');
     link.click()
   })
 
