@@ -24,19 +24,22 @@ services:
     restart: always
     volumes:
       - ./db:/docker-entrypoint-initdb.d
-
+  
   java:
     container_name: java
-    restart: always
     build: ./java
     working_dir: /java
     volumes:
-      - ./java:/java
-    expose:
-      - "8080"
+      - ./java:/tmp
+    ports: 
+      - "8080:8080"
     command: mvn clean spring-boot:run
+    #command: mvn package
     links:
       - mysql
+    volumes:
+      - ./java:/java
+    #  - .java/target/javaSpringRestAPI-0.0.1-SNAPSHOT.war:/usr/local/tomcat/webapps/ROOT.war
 
   # mongodb:
   #   container_name: mongodb
